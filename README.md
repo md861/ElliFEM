@@ -64,13 +64,9 @@ Numerical parameters, e.g. the quadrature points for integration, etc could be s
  A short summary of some files (which are usually modified the most) is presented here. 
  * *dat* - This is the "su2" format mesh file supplied by the user, generated from Gmsh. The file should be named as "dat" to be read by the solver.
  * *femSolver.f90* - The main code that coordinates the subroutines and functions. This is where you could change some numerical parameters e.g. 
-    * the wavenumber and angular frequency of the problem, 
-    * number of integration points to be used, 
-    * step size in time for finite differences, 
-    * total number of timesteps, 
-    * number of plots to be stored, etc.
+    * the wavenumber of the problem (if solving for Helmholtz), 
+    * number of integration points to be used, etc.
  * *pellib_Hlmhltz.f90* - This file allows to specify the boundary sources as well as any sources (`FZ`) inside the domain.
- * *pellib_DIC.f90* - Modify this file to specify initial conditions.
  * *ln_norm.f90* and *proslib.f90* - These two files are used to specify the analytical solution (if available) for the computation of normed errors and plotting of analytical values over mesh, respectively.
  
 ## Usage:
@@ -78,10 +74,8 @@ All the files should be in the same folder. Open a terminal in the code folder, 
 * Compilation: `./CleanNCompile`
 * Run: `./femSolver`
 
-The terminal then outputs the time step currently being processed, with the error in numerical solution if the analytical solution is available. 
- 
 ## Example files:
-An example *dat* file that has a 2D mesh with 2-nd order quadrilateral elements (generated with [Gmsh](https://gmsh.info/)) is located in the [Example/10pi_p2](https://github.com/md861/ElliFEM/tree/main/Example/10pi_p2) folder. The Paraview plots of the mesh and an example numerical solution for a progressive plane wave with Neuman boundaries and a non-zero (sinusoidal) source solved over this mesh, are shown as animated gifs at the beginning of this read-me file. 
+An example *dat* file that has a 2D mesh with 4-th order quadrilateral elements (generated with [Gmsh](https://gmsh.info/)) is located in the [Example/10pi_p2](https://github.com/md861/ElliFEM/tree/main/Example/10pi_p2) folder. The Paraview plots of the mesh and an example numerical solution for a progressive plane wave with Neuman boundaries and a non-zero (sinusoidal) source solved over this mesh, are shown as animated gifs at the beginning of this read-me file. 
  
 ## References
 <a id="1">[1]</a> 
