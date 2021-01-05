@@ -66,7 +66,7 @@ Numerical parameters, e.g. the quadrature points for integration, etc could be s
  * *femSolver.f90* - The main code that coordinates the subroutines and functions. This is where you could change some numerical parameters e.g. 
     * the wavenumber of the problem (if solving for Helmholtz), 
     * number of integration points to be used, etc.
- * *pellib_Hlmhltz.f90* - This file allows to specify the boundary sources as well as any sources (`FZ`) inside the domain.
+ * *pellib_Hlmhltz.f90* - This file allows to specify the boundary sources as well as any sources (`FZ_Phi`) inside the domain.
  * *ln_norm.f90* and *proslib.f90* - These two files are used to specify the analytical solution (if available) for the computation of normed errors and plotting of analytical values over mesh, respectively.
  
 ## Usage:
