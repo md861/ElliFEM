@@ -1,5 +1,5 @@
 # ElliFEM
-A Fortran code to solve an Initial-Boundary-value scalar wave problem in 2D. The solver uses semidiscrete formulation with lagrange polynomials based Finite Element Method (FEM) for space and diagonally implicit Runge-Kutta family of methods for time discretizations, respectively. The solver also provides an option to enrich the solution space for better convergence rates [[1]](#1). The code is written for the Linux API, however, the system calls could be modified to be run over other operating systems as well. 
+A Fortran code to solve a boundary-value elliptic problem in 2D. The solver uses lagrange polynomials based Finite Element Method (FEM) for space discretizations. The solver also provides an option to enrich the solution space for better convergence rates [[1]](#1). The code is written for the Linux API, however, the system calls could be modified to be run over other operating systems as well. 
 
 <img src="https://github.com/md861/ElliFEM/blob/main/images/mesh_p4.png" width="400" height="450"> <img src="https://github.com/md861/ElliFEM/blob/main/images/30pi_p4.png" width="400" height="450">
 ## Features
