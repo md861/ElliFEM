@@ -32,6 +32,7 @@ double precision JCBT(NDIME,NDIME),&
 
 double precision n(NDIME)
 integer EDG_TYPE
+integer NBC_pos
 
 !definitions for DIC,M,S
 double precision SFDG(NDIME,NODEL),&
@@ -140,8 +141,9 @@ double precision Kp,Theta_p
     endDO
  
   !Integrate over boundary. {For non-zero BCs}
+  NBC_pos = 1
   !edge 1
-   if(EFACT(1,1).EQ. 1)THEN   
+   if(EFACT(NBC_pos,1).EQ. 1)THEN   
    EDG_TYPE = 1
    !write(*,*)'-----------------'
    !write(*,*) 'ELEMENT = ',IELEM,' EDGE = 1'
@@ -197,7 +199,7 @@ double precision Kp,Theta_p
    endif
   
    !edge 2
-   if(EFACT(1,2).EQ. 1)THEN  
+   if(EFACT(NBC_pos,2).EQ. 1)THEN  
    EDG_TYPE = 0 
    !write(*,*)'-----------------'
    !write(*,*) 'ELEMENT = ',IELEM,' EDGE = 2'
@@ -255,7 +257,7 @@ double precision Kp,Theta_p
    endif
 
    !edge 3
-   if(EFACT(1,3).EQ. 1)THEN   
+   if(EFACT(NBC_pos,3).EQ. 1)THEN   
    EDG_TYPE = 1
    !write(*,*)'-----------------'
    !write(*,*) 'ELEMENT = ',IELEM,' EDGE = 3'
@@ -312,7 +314,7 @@ double precision Kp,Theta_p
    endif
    
    !edge 4
-   if(EFACT(1,4).EQ. 1)THEN   
+   if(EFACT(NBC_pos,4).EQ. 1)THEN   
    EDG_TYPE = 0
    !write(*,*)'-----------------'
    !write(*,*) 'ELEMENT = ',IELEM,' EDGE = 4'
