@@ -27,7 +27,7 @@ This tool is not required to run the ElliFEM code, although, it does provide a w
 ## Directory tree and output files
 The output files are stored in a folder named *case_default* created at runtime. The following files are created:
 * *logfile.txt* - This file logs the information about the problem solved such as total degrees of freedom, mesh coordinates, node and edge mappings, integration points used, etc.
-* *Plots* - Paraview plot files that contain the numerical (and analytical if available) values over the mesh for each time step.
+* *Plots* - Paraview plot files that contain the numerical (and analytical if available) solutions computed over the mesh.
 * *error_data* - If analytical solutions are given, then the normed errors in numerical solution are stored in these files.
 
 Towards the end of the run, the ElliFEM code collates all the output files generated and stores them inside the *case_default* directory. By default, at compilation, the code cleans any previous existing folder named *case_default*, including its contents, thus caution must be taken (by renaiming the *case_default* folder, or backing it up, from any previous runs)
@@ -37,21 +37,21 @@ The ElliFEM code searches for a file named *dat*, inside the current working dir
 
 To prepare the mesh, create a 2D geometry in [Gmsh](https://gmsh.info/) and export the mesh (only meshed using quadrilateral elements) as the *SU2* format and name it as *dat*. A sample *dat* file is given in the [Example](https://github.com/md861/ElliFEM/tree/main/Example) folder. Then make sure that this *dat* file (or a copy of it) resides in the same folder as the compiled ElliFEM code. 
 
-Make sure to mark the boundary curves/nodes for each type of boundary condition. The boundaries can be described in any sequence, however do make note of the sequence of their definition as this would provide the index (for *pellib.f90* file) to implement the corresponding conditions for each boundadry type. 
+Make sure to mark the boundary curves/nodes for each type of boundary condition. The boundaries can be described in any sequence, however do make note of the sequence of their definition as this would provide the index (for *pellib_Hlmhltz.f90* file) to implement the corresponding conditions for each boundadry type. 
 
 NB: At the moment, only non-homogenous Neumann and homogenous Dirichlet conditions may be applied. Although, the future versions would contain the provision for non-homogenous mixed boundaries (even with enriched solution basis).
 
 ## Implementing problem sources
-### Initial condition
-Modify the *pellib_DIC.f90* file to specify the initial conditions for the wave amplitude (`FZ_Phi`) and its time derivative (`FZ_Vlcty`).
 ### Boundary condition(s)
 * Non-homogeneous Neumann boundary: 
-    * In *pellib.f90* under the "!Integrate over edges" section set the `NBC_pos` index as the same as the corresponding index of the boundary type defined during meshing (see [Mesh preparation](#mesh-preparation) for details). In this sections, update the `GZ` variable that is used to implement the relevant condition for the given boundary type (chosen using `NBC_pos` index). NB: `n(1)` and `n(2)` store the x and y components of the normal vector to a given edge. 
+    * In *pellib_Hlmhltz.f90* under the "!Integrate over edges" section set the `NBC_pos` index as the same as the corresponding index of the boundary type defined during meshing (see [Mesh preparation](#mesh-preparation) for details). In this sections, update the `GZ_Phi` variable that is used to implement the relevant condition for the given boundary type (chosen using `NBC_pos` index). NB: `n(1)` and `n(2)` store the x and y components of the normal vector to a given edge. 
     * For each different boundary condition (of non-homogeneous Neumann type), copy and paste the entire "!Integrate over edges" section (i.e. all the 4 subsections integrating over the four sides of a quadrilaterl) and set the `NBC_pos` index appropriately. 
 * Homogeneous Neumann boundary:
-    * Since these boundaries do not require integration, simply do not include any "!Integrate over edges" section for this `NBC_pos` index in the *pellib.f90* file.
+    * Since these boundaries do not require integration, simply do not include any "!Integrate over edges" section for this `NBC_pos` index in the *pellib_Hlmhltz.f90* file.
+* Homogeneous Dirichlet boundary: 
+   * In *femSolver.f90* under the "!Build marked indices for DBC" section, set the `DBC_pos` index as the same as the corresponding index of the Dirichlet boundary type defined during meshing (see [Mesh preparation](#mesh-preparation) for details). 
 ### Source term(s)
-In the *pellib.f90* file, under the "!Integrate inside domain" section, update the `FZ` variable that evaluates the source terms for the given problem. If there are no source terms present, then this section can simply be commented out. 
+In the *pellib_Hlmhltz.f90* file, under the "!Integrate inside domain" section, update the `FZ` variable that evaluates the source terms for the given problem. If there are no source terms present, then this section can simply be commented out. 
 
 ## Implementing numerical parameters
 Numerical parameters, e.g. the quadrature points for integration, total number of time iterations, etc could be set in the *femSolver.f90* file. Some (most used) parameters are detailed below:
@@ -74,7 +74,7 @@ Numerical parameters, e.g. the quadrature points for integration, total number o
     * step size in time for finite differences, 
     * total number of timesteps, 
     * number of plots to be stored, etc.
- * *pellib.f90* - This file allows to specify the boundary sources as well as any sources (`FZ`) inside the domain.
+ * *pellib_Hlmhltz.f90* - This file allows to specify the boundary sources as well as any sources (`FZ`) inside the domain.
  * *pellib_DIC.f90* - Modify this file to specify initial conditions.
  * *ln_norm.f90* and *proslib.f90* - These two files are used to specify the analytical solution (if available) for the computation of normed errors and plotting of analytical values over mesh, respectively.
  
