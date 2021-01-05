@@ -1,0 +1,2 @@
+#!/bin/bash
+gfortran -o femSolver femSolver.f90 data_read.f90 pellib_Hlmhltz.f90 putlib.f90 psflib.f90 ln_norm.f90 proslib.f90 putlib_D.f90 -llapack -lblas

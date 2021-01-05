@@ -1,0 +1,5 @@
+#!/bin/bash
+rm -v femSolver
+rm -v logfile.txt
+rm -rv PLOTS
+rm -rv case_default
