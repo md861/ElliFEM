@@ -35,7 +35,7 @@ Towards the end of the run, the ElliFEM code collates all the output files gener
 ## Mesh preparation
 The ElliFEM code searches for a file named *dat*, inside the current working directory, during runtime to get the mesh information. If this file is not present in the folder, the code would compile correctly, but would generate an error during runtime (NB: the type of error generated is API dependent, and is generally a segmentation fault. However future development of the code would consist a proper handler for this, and other potential, errors).
 
-To prepare the mesh, create a 2D geometry in [Gmsh](https://gmsh.info/) and export the mesh (only meshed using quadrilateral elements) as the *SU2* format and name it as *dat*. A sample *dat* file is given in the [Example](https://github.com/md861/ElliFEM/tree/main/Example) folder. Then make sure that this *dat* file (or a copy of it) resides in the same folder as the compiled ElliFEM code. 
+To prepare the mesh, create a 2D geometry in [Gmsh](https://gmsh.info/) and export the mesh (only meshed using quadrilateral elements) as the *SU2* format and name it as *dat*. Some sample *dat* files are given in the [Example](https://github.com/md861/ElliFEM/tree/main/Example) folder. Then make sure that this *dat* file (or a copy of it) resides in the same folder as the compiled ElliFEM code. 
 
 Make sure to mark the boundary curves/nodes for each type of boundary condition. The boundaries can be described in any sequence, however do make note of the sequence of their definition as this would provide the index (for *pellib_Hlmhltz.f90* file) to implement the corresponding conditions for each boundadry type. 
 
