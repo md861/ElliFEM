@@ -51,7 +51,7 @@ NB: At the moment, only non-homogenous Neumann and homogenous Dirichlet conditio
 * Homogeneous Dirichlet boundary: 
    * In *femSolver.f90* under the "!Build marked indices for DBC" section, set the `DBC_pos` index as the same as the corresponding index of the Dirichlet boundary type defined during meshing (see [Mesh preparation](#mesh-preparation) for details). 
 ### Source term(s)
-In the *pellib_Hlmhltz.f90* file, under the "!Integrate inside domain" section, update the `FZ` variable that evaluates the source terms for the given problem. If there are no source terms present, then this section can simply be commented out. 
+In the *pellib_Hlmhltz.f90* file, under the "!Integrate inside domain" section, update the `FZ_Phi` variable that evaluates the source terms for the given problem. 
 
 ## Implementing numerical parameters
 Numerical parameters, e.g. the quadrature points for integration, total number of time iterations, etc could be set in the *femSolver.f90* file. Some (most used) parameters are detailed below:
