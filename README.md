@@ -4,6 +4,7 @@ A Fortran code to solve a boundary-value elliptic problem in 2D. The solver uses
 <img src="https://github.com/md861/ElliFEM/blob/main/images/mesh_p4.png" width="400" height="450"> <img src="https://github.com/md861/ElliFEM/blob/main/images/30pi_p4.png" width="400" height="450">
 ## Features
 * Directly import 2D meshes generated in [Gmsh](https://gmsh.info/) - an open source mesh generator.
+* Seamless integration of user defined enrichment functions into the Finite Element solution space.
 * Dynamic allocation of all variables and arrays, depending on the imported mesh and order of FEM polynomials.
 * Plot the mesh and numerical solutions in [Paraview](https://www.paraview.org/) - an open source alternative to Tecplot.
 * Apply Neumann, Dirichlet and Robin boundary conditions on edges marked respectively in Gmsh. Automated calculation of edge normals for using Neumann boundaries.
@@ -68,6 +69,7 @@ Numerical parameters, e.g. the quadrature points for integration, etc could be s
     * number of integration points to be used, etc.
  * *pellib_Hlmhltz.f90* - This file allows to specify the boundary sources as well as any sources (`FZ_Phi`) inside the domain.
  * *ln_norm.f90* and *proslib.f90* - These two files are used to specify the analytical solution (if available) for the computation of normed errors and plotting of analytical values over mesh, respectively.
+ * *psflib.f90* - Modify the finite element shape functions used for the numerical solution. By default, Lagrange polynomials are used for `NANGL = 1` (pertaining to the order of elements defined by the mesh imported from *dat* file). For `NANGL > 1`, by default the shape functions are defined using plane wave enrichment functions [[1]](#1).
  
 ## Usage:
 All the files should be in the same folder. Open a terminal in the code folder, and type the following for:
