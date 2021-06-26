@@ -78,7 +78,10 @@ All the files should be in the same folder. Open a terminal in the code folder, 
 
 ## Example files:
 An example *dat* file that has a 2D mesh with 4-th order quadrilateral elements (generated with [Gmsh](https://gmsh.info/)) is located in the [Example/30pi_p4](https://github.com/md861/ElliFEM/tree/main/Example/30pi_p4) folder. The Paraview plots of the mesh and an example numerical solution for a Helmholtz problem (for wavenumber = 30<img src="http://latex2png.com/pngs/ed7e6344a97275d7ed3b0ab52b9f9eb9.png" width="10" height="10">) with non-zero Neuman (inner) boundaries and Homogeneous Dirichlet (outer) boundaries solved over this mesh, are shown at the beginning of this read-me file. 
- 
+
+## Citing this package
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5034305.svg)](https://doi.org/10.5281/zenodo.5034305)
+
 ## References
 <a id="1">[1]</a> 
 M. Drolia, *et al*. Enriched finite elements for initial-value problem of transverse electromagnetic waves in time domain. *Computers & Structures*, 182, 354-367, 2017.
